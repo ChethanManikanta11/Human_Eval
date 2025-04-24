@@ -41,12 +41,16 @@ class CustomEvaluator():
         """
         # Get the project root directory (where the package is installed)
         # project_root = Path(__file__).parent
+        print(item.keys())
         prompt = self.prompt['eval_prompt']
+       
         question = item.get('question', '')
-        ground_truth = item.get('expected_answer', '')
-        prediction = item.get('generated_answer', '')
-        test = item.get('test', '')
-        eval_prompt = prompt.format(user_query=question, ground_truth=ground_truth, prediction=prediction, test=test)
+        
+        ground_truth = item.get('gt_answer', '')
+        prediction = item.get('answer', '')
+        test=item.get('test')
+        print(test)
+        eval_prompt = prompt.format(user_query=question, ground_truth=ground_truth, prediction=prediction,test=test)
         return eval_prompt
 
     def create_payload(self, prompt: str) -> Dict[str, Any]:
@@ -139,7 +143,7 @@ class CustomEvaluator():
 
         for attempt in range(max_retries):
             try:
-                # print(self.evaluator_llm)
+                print(self.evaluator_llm)
                 response = self.client.converse(
                     modelId=self.evaluator_llm,
                     messages=payload,
@@ -179,17 +183,7 @@ class CustomEvaluator():
             each['response'] = self.parse_response(response)
         return data
 
-    def evaluate_results(self, result: List[Dict[str, Any]]) -> dict[str, int | Any]:
-        """
-        Evaluate the results of the processed data.
-
-        Args:
-            results (List[Dict[str, Any]]): List of evaluation results.
-        """
-        full_score_count = sum(1 for item in result if item['response']['score'] == 1)
-        return {"number of samples correct": full_score_count}
-
-    def evaluate_results_dict(self, results: List[Dict[str, Any]]) -> None:
+    def evaluate_results(self, results: List[Dict[str, Any]]) -> None:
         """
         Evaluate the results of the processed data.
 
