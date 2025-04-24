@@ -1,0 +1,7 @@
+{
+    "accountNumber": "677276078734",
+    "regionName": "us-east-1",
+    "bedrockExecutionRoleArn": "arn:aws:iam::677276078734:role/advanced-rag-workshop-bedrock_execution_role-us-east-1",
+    "s3Bucket": "flotorch-benchmarking",
+    "s3_ground_truth_path": "s3://flotorch-benchmarking/ground_truth_data/ground_truth.json"
+}

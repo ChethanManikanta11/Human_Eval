@@ -1,0 +1,970 @@
+{
+    "us.amazon.nova-lite-v1:0": [
+        {
+            "metadata": {
+                "inputTokens": 335,
+                "outputTokens": 80,
+                "totalTokens": 415,
+                "latencyMs": 449
+            },
+            "generated_answer": "```python\nfrom typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if abs(numbers[i] - numbers[j]) < threshold:\n                return True\n    return False\n```",
+            "expected_answer": "    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n",
+            "question": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 321,
+                "outputTokens": 103,
+                "totalTokens": 424,
+                "latencyMs": 530
+            },
+            "generated_answer": "result = []\n    current_group = \"\"\n    open_count = 0\n\n    for char in paren_string.replace(\" \", \"\"):\n        if char == '(':\n            open_count += 1\n        elif char == ')':\n            open_count -= 1\n\n        current_group += char\n\n        if open_count == 0 and len(current_group) > 0:\n            result.append(current_group)\n            current_group = \"\"\n\n    return result",
+            "expected_answer": "    result = []\n    current_string = []\n    current_depth = 0\n\n    for c in paren_string:\n        if c == '(':\n            current_depth += 1\n            current_string.append(c)\n        elif c == ')':\n            current_depth -= 1\n            current_string.append(c)\n\n            if current_depth == 0:\n                result.append(''.join(current_string))\n                current_string.clear()\n\n    return result\n",
+            "question": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 285,
+                "outputTokens": 94,
+                "totalTokens": 379,
+                "latencyMs": 438
+            },
+            "generated_answer": "```python\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n    return number - int(number)\n```",
+            "expected_answer": "    return number % 1.0\n",
+            "question": "\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 324,
+                "outputTokens": 28,
+                "totalTokens": 352,
+                "latencyMs": 263
+            },
+            "generated_answer": "balance = 0\n\nfor operation in operations:\n    balance += operation\n    if balance < 0:\n        return True\nreturn False",
+            "expected_answer": "    balance = 0\n\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n\n    return False\n",
+            "question": "from typing import List\n\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\" You're given a list of deposit and withdrawal operations on a bank account that starts with\n    zero balance. Your task is to detect if at any point the balance of account fallls below zero, and\n    at that point function should return True. Otherwise it should return False.\n    >>> below_zero([1, 2, 3])\n    False\n    >>> below_zero([1, 2, -4, 5])\n    True\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 322,
+                "outputTokens": 64,
+                "totalTokens": 386,
+                "latencyMs": 357
+            },
+            "generated_answer": "mean_value = sum(numbers) / len(numbers)\n    absolute_deviations = [abs(num - mean_value) for num in numbers]\n    mean_absolute_deviation = sum(absolute_deviations) / len(numbers)\n    return mean_absolute_deviation",
+            "expected_answer": "    mean = sum(numbers) / len(numbers)\n    return sum(abs(x - mean) for x in numbers) / len(numbers)\n",
+            "question": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 301,
+                "outputTokens": 79,
+                "totalTokens": 380,
+                "latencyMs": 446
+            },
+            "generated_answer": "```python\nfrom typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    result = []\n    for i in range(len(numbers)):\n        result.append(numbers[i])\n        if i < len(numbers) - 1:\n            result.append(delimeter)\n    return result\n```",
+            "expected_answer": "    if not numbers:\n        return []\n\n    result = []\n\n    for n in numbers[:-1]:\n        result.append(n)\n        result.append(delimeter)\n\n    result.append(numbers[-1])\n\n    return result\n",
+            "question": "from typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 317,
+                "outputTokens": 120,
+                "totalTokens": 437,
+                "latencyMs": 556
+            },
+            "generated_answer": "```python\nfrom typing import List\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    groups = paren_string.split()\n    result = []\n    for group in groups:\n        depth = 0\n        max_depth = 0\n        for char in group:\n            if char == '(':\n                depth += 1\n                if depth > max_depth:\n                    max_depth = depth\n            elif char == ')':\n                depth -= 1\n        result.append(max_depth)\n    return result\n```",
+            "expected_answer": "    def parse_paren_group(s):\n        depth = 0\n        max_depth = 0\n        for c in s:\n            if c == '(':\n                depth += 1\n                max_depth = max(depth, max_depth)\n            else:\n                depth -= 1\n\n        return max_depth\n\n    return [parse_paren_group(x) for x in paren_string.split(' ') if x]\n",
+            "question": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 306,
+                "outputTokens": 16,
+                "totalTokens": 322,
+                "latencyMs": 233
+            },
+            "generated_answer": "return [s for s in strings if substring in s]",
+            "expected_answer": "    return [x for x in strings if substring in x]\n",
+            "question": "from typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 320,
+                "outputTokens": 78,
+                "totalTokens": 398,
+                "latencyMs": 368
+            },
+            "generated_answer": "```python\nfrom typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    sum_result = 0\n    product_result = 1\n    for number in numbers:\n        sum_result += number\n        product_result *= number\n    return sum_result, product_result\n```",
+            "expected_answer": "    sum_value = 0\n    prod_value = 1\n\n    for n in numbers:\n        sum_value += n\n        prod_value *= n\n    return sum_value, prod_value\n",
+            "question": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 306,
+                "outputTokens": 60,
+                "totalTokens": 366,
+                "latencyMs": 357
+            },
+            "generated_answer": "```python\nmax_so_far = numbers[0]\nrolling_max_list = []\nfor num in numbers:\n    if num > max_so_far:\n        max_so_far = num\n    rolling_max_list.append(max_so_far)\n```",
+            "expected_answer": "    running_max = None\n    result = []\n\n    for n in numbers:\n        if running_max is None:\n            running_max = n\n        else:\n            running_max = max(running_max, n)\n\n        result.append(running_max)\n\n    return result\n",
+            "question": "from typing import List, Tuple\n\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 357,
+                "outputTokens": 162,
+                "totalTokens": 519,
+                "latencyMs": 688
+            },
+            "generated_answer": "```python\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n    for i in range(len(string)):\n        if is_palindrome(string[i:]):\n            prefix = string[:i]\n            return string + prefix[::-1]\n```",
+            "expected_answer": "    if not string:\n        return ''\n\n    beginning_of_suffix = 0\n\n    while not is_palindrome(string[beginning_of_suffix:]):\n        beginning_of_suffix += 1\n\n    return string + string[:beginning_of_suffix][::-1]\n",
+            "question": "\n\ndef is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 286,
+                "outputTokens": 45,
+                "totalTokens": 331,
+                "latencyMs": 337
+            },
+            "generated_answer": "result = []\n\n    for char_a, char_b in zip(a, b):\n        result.append('1' if char_a != char_b else '0')\n    return ''.join(result)",
+            "expected_answer": "    def xor(i, j):\n        if i == j:\n            return '0'\n        else:\n            return '1'\n\n    return ''.join(xor(x, y) for x, y in zip(a, b))\n",
+            "question": "from typing import List\n\n\ndef string_xor(a: str, b: str) -> str:\n    \"\"\" Input are two strings a and b consisting only of 1s and 0s.\n    Perform binary XOR on these inputs and return result also as a string.\n    >>> string_xor('010', '110')\n    '100'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 308,
+                "outputTokens": 158,
+                "totalTokens": 466,
+                "latencyMs": 695
+            },
+            "generated_answer": "```python\nfrom typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    if not strings:\n        return None\n    longest_string = strings[0]\n    for string in strings:\n        if len(string) > len(longest_string):\n            longest_string = string\n    return longest_string\n```",
+            "expected_answer": "    if not strings:\n        return None\n\n    maxlen = max(len(x) for x in strings)\n    for s in strings:\n        if len(s) == maxlen:\n            return s\n",
+            "question": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 274,
+                "outputTokens": 21,
+                "totalTokens": 295,
+                "latencyMs": 235
+            },
+            "generated_answer": "```python\nwhile b:\n    a, b = b, a % b\nreturn a\n```",
+            "expected_answer": "    while b:\n        a, b = b, a % b\n    return a\n",
+            "question": "\n\ndef greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two integers a and b\n    >>> greatest_common_divisor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 263,
+                "outputTokens": 31,
+                "totalTokens": 294,
+                "latencyMs": 263
+            },
+            "generated_answer": "```python\nresult = []\n\nfor i in range(len(string)):\n    result.append(string[:i+1])\nreturn result\n```",
+            "expected_answer": "    result = []\n\n    for i in range(len(string)):\n        result.append(string[:i+1])\n    return result\n",
+            "question": "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of all prefixes from shortest to longest of the input string\n    >>> all_prefixes('abc')\n    ['a', 'ab', 'abc']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 272,
+                "outputTokens": 25,
+                "totalTokens": 297,
+                "latencyMs": 245
+            },
+            "generated_answer": "```python\nreturn ' '.join([str(x) for x in range(n + 1)])\n```",
+            "expected_answer": "    return ' '.join([str(x) for x in range(n + 1)])\n",
+            "question": "\n\ndef string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 272,
+                "outputTokens": 107,
+                "totalTokens": 379,
+                "latencyMs": 452
+            },
+            "generated_answer": "```python\ndef count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct characters (regardless of case) does it consist of\n    >>> count_distinct_characters('xyzXYZ')\n    3\n    >>> count_distinct_characters('Jerry')\n    4\n    \"\"\"\n    distinct_chars = set()\n    for char in string:\n        distinct_chars.add(char.lower())\n    return len(distinct_chars)\n```",
+            "expected_answer": "    return len(set(string.lower()))\n",
+            "question": "\n\ndef count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct characters (regardless of case) does it consist of\n    >>> count_distinct_characters('xyzXYZ')\n    3\n    >>> count_distinct_characters('Jerry')\n    4\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 376,
+                "outputTokens": 91,
+                "totalTokens": 467,
+                "latencyMs": 434
+            },
+            "generated_answer": "```python\nfrom typing import List\n\n\ndef parse_music(music_string: str) -> List[int]:\n    notes = music_string.split()\n    beats = []\n    for note in notes:\n        if note == 'o':\n            beats.append(4)\n        elif note == 'o|':\n            beats.append(2)\n        elif note == '.|':\n            beats.append(1)\n    return beats\n```",
+            "expected_answer": "    note_map = {'o': 4, 'o|': 2, '.|': 1}\n    return [note_map[x] for x in music_string.split(' ') if x]\n",
+            "question": "from typing import List\n\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 296,
+                "outputTokens": 44,
+                "totalTokens": 340,
+                "latencyMs": 327
+            },
+            "generated_answer": "count = start = 0\nwhile True:\n    start = string.find(substring, start) + 1\n    if start > 0:\n        count += 1\n    else:\n        return count",
+            "expected_answer": "    times = 0\n\n    for i in range(len(string) - len(substring) + 1):\n        if string[i:i+len(substring)] == substring:\n            times += 1\n\n    return times\n",
+            "question": "\n\ndef how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 314,
+                "outputTokens": 152,
+                "totalTokens": 466,
+                "latencyMs": 597
+            },
+            "generated_answer": "```python\nfrom typing import List\n\ndef sort_numbers(numbers: str) -> str:\n    number_map = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    \n    number_list = numbers.split()\n    sorted_numbers = sorted(number_list, key=lambda x: number_map[x])\n    return ' '.join(sorted_numbers)\n```",
+            "expected_answer": "    value_map = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    return ' '.join(sorted([x for x in numbers.split(' ') if x], key=lambda x: value_map[x]))\n",
+            "question": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        }
+    ],
+    "us.amazon.nova-micro-v1:0": [
+        {
+            "metadata": {
+                "inputTokens": 335,
+                "outputTokens": 47,
+                "totalTokens": 382,
+                "latencyMs": 329
+            },
+            "generated_answer": "for i in range(len(numbers)):\n    for j in range(i + 1, len(numbers)):\n        if abs(numbers[i] - numbers[j]) < threshold:\n            return True\nreturn False",
+            "expected_answer": "    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n",
+            "question": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 321,
+                "outputTokens": 108,
+                "totalTokens": 429,
+                "latencyMs": 548
+            },
+            "generated_answer": "groups = []\nopen_count = 0\ncurrent_group = \"\"\n\nfor char in paren_string:\n    if char == ' ':\n        continue\n    if char == '(':\n        open_count += 1\n    elif char == ')':\n        open_count -= 1\n    current_group += char\n    if open_count == 0 and current_group[0] == '(':\n        groups.append(current_group[1:-1])\n        current_group = \"\"\n\nreturn groups",
+            "expected_answer": "    result = []\n    current_string = []\n    current_depth = 0\n\n    for c in paren_string:\n        if c == '(':\n            current_depth += 1\n            current_string.append(c)\n        elif c == ')':\n            current_depth -= 1\n            current_string.append(c)\n\n            if current_depth == 0:\n                result.append(''.join(current_string))\n                current_string.clear()\n\n    return result\n",
+            "question": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 285,
+                "outputTokens": 75,
+                "totalTokens": 360,
+                "latencyMs": 412
+            },
+            "generated_answer": "```\ndef truncate_number(number: float) -> float:\n    return number - int(number)\n```\n\nThis function works by subtracting the integer part of the number from the original number to isolate the decimal part. The `int()` function is used to get the integer part of the number, and subtracting this from the original number leaves just the decimal part.",
+            "expected_answer": "    return number % 1.0\n",
+            "question": "\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 325,
+                "outputTokens": 28,
+                "totalTokens": 353,
+                "latencyMs": 299
+            },
+            "generated_answer": "balance = 0\nfor operation in operations:\n    balance += operation\n    if balance < 0:\n        return True\nreturn False",
+            "expected_answer": "    balance = 0\n\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n\n    return False\n",
+            "question": "from typing import List\n\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\" You're given a list of deposit and withdrawal operations on a bank account that starts with\n    zero balance. Your task is to detect if at any point the balance of account fallls below zero, and\n    at that point function should return True. Otherwise it should return False.\n    >>> below_zero([1, 2, 3])\n    False\n    >>> below_zero([1, 2, -4, 5])\n    True\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 322,
+                "outputTokens": 44,
+                "totalTokens": 366,
+                "latencyMs": 331
+            },
+            "generated_answer": "x_mean = sum(numbers) / len(numbers)\n    deviations = [abs(x - x_mean) for x in numbers]\n    return sum(deviations) / len(numbers)",
+            "expected_answer": "    mean = sum(numbers) / len(numbers)\n    return sum(abs(x - mean) for x in numbers) / len(numbers)\n",
+            "question": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 301,
+                "outputTokens": 41,
+                "totalTokens": 342,
+                "latencyMs": 338
+            },
+            "generated_answer": "interspersed = []\nfor i, num in enumerate(numbers):\n    interspersed.append(num)\n    if i < len(numbers) - 1:\n        interspersed.append(delimeter)\nreturn interspersed",
+            "expected_answer": "    if not numbers:\n        return []\n\n    result = []\n\n    for n in numbers[:-1]:\n        result.append(n)\n        result.append(delimeter)\n\n    result.append(numbers[-1])\n\n    return result\n",
+            "question": "from typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 317,
+                "outputTokens": 89,
+                "totalTokens": 406,
+                "latencyMs": 416
+            },
+            "generated_answer": "max_depth = []\n    current_depth = 0\n\n    for group in paren_string.split():\n        depth = 0\n        for char in group:\n            if char == '(':\n                depth += 1\n                current_depth = max(current_depth, depth)\n            elif char == ')':\n                depth -= 1\n        max_depth.append(current_depth)\n    return max_depth",
+            "expected_answer": "    def parse_paren_group(s):\n        depth = 0\n        max_depth = 0\n        for c in s:\n            if c == '(':\n                depth += 1\n                max_depth = max(depth, max_depth)\n            else:\n                depth -= 1\n\n        return max_depth\n\n    return [parse_paren_group(x) for x in paren_string.split(' ') if x]\n",
+            "question": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 305,
+                "outputTokens": 24,
+                "totalTokens": 329,
+                "latencyMs": 291
+            },
+            "generated_answer": "filtered = []\n\nfor string in strings:\n    if substring in string:\n        filtered.append(string)\n\nreturn filtered",
+            "expected_answer": "    return [x for x in strings if substring in x]\n",
+            "question": "from typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 319,
+                "outputTokens": 44,
+                "totalTokens": 363,
+                "latencyMs": 267
+            },
+            "generated_answer": "sum_val = 0\n    product_val = 1\n    for num in numbers:\n        sum_val += num\n        product_val *= num\n    return sum_val, product_val",
+            "expected_answer": "    sum_value = 0\n    prod_value = 1\n\n    for n in numbers:\n        sum_value += n\n        prod_value *= n\n    return sum_value, prod_value\n",
+            "question": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 305,
+                "outputTokens": 51,
+                "totalTokens": 356,
+                "latencyMs": 321
+            },
+            "generated_answer": "max_so_far = float('-inf')\nresult = []\nfor num in numbers:\n    if num > max_so_far:\n        max_so_far = num\n    result.append(max_so_far)\nreturn result",
+            "expected_answer": "    running_max = None\n    result = []\n\n    for n in numbers:\n        if running_max is None:\n            running_max = n\n        else:\n            running_max = max(running_max, n)\n\n        result.append(running_max)\n\n    return result\n",
+            "question": "from typing import List, Tuple\n\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 356,
+                "outputTokens": 49,
+                "totalTokens": 405,
+                "latencyMs": 344
+            },
+            "generated_answer": "for i in range(len(string)-1, -1, -1):\n    if is_palindrome(string[i:]):\n        prefix = string[:i]\n        break\n\nreturn string + prefix[::-1]",
+            "expected_answer": "    if not string:\n        return ''\n\n    beginning_of_suffix = 0\n\n    while not is_palindrome(string[beginning_of_suffix:]):\n        beginning_of_suffix += 1\n\n    return string + string[:beginning_of_suffix][::-1]\n",
+            "question": "\n\ndef is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 286,
+                "outputTokens": 37,
+                "totalTokens": 323,
+                "latencyMs": 317
+            },
+            "generated_answer": "for i in range(len(a)):\n    if a[i] == b[i]:\n        result += '0'\n    else:\n        result += '1'\nreturn result",
+            "expected_answer": "    def xor(i, j):\n        if i == j:\n            return '0'\n        else:\n            return '1'\n\n    return ''.join(xor(x, y) for x, y in zip(a, b))\n",
+            "question": "from typing import List\n\n\ndef string_xor(a: str, b: str) -> str:\n    \"\"\" Input are two strings a and b consisting only of 1s and 0s.\n    Perform binary XOR on these inputs and return result also as a string.\n    >>> string_xor('010', '110')\n    '100'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 308,
+                "outputTokens": 18,
+                "totalTokens": 326,
+                "latencyMs": 240
+            },
+            "generated_answer": "if not strings:\n    return None\n    return max(strings, key=len)",
+            "expected_answer": "    if not strings:\n        return None\n\n    maxlen = max(len(x) for x in strings)\n    for s in strings:\n        if len(s) == maxlen:\n            return s\n",
+            "question": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 275,
+                "outputTokens": 16,
+                "totalTokens": 291,
+                "latencyMs": 244
+            },
+            "generated_answer": "while b:\n    a, b = b, a % b\nreturn a",
+            "expected_answer": "    while b:\n        a, b = b, a % b\n    return a\n",
+            "question": "\n\ndef greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two integers a and b\n    >>> greatest_common_divisor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 264,
+                "outputTokens": 25,
+                "totalTokens": 289,
+                "latencyMs": 272
+            },
+            "generated_answer": "[\n    x for i in range(len(string) + 1) for x in string[:i]\n]",
+            "expected_answer": "    result = []\n\n    for i in range(len(string)):\n        result.append(string[:i+1])\n    return result\n",
+            "question": "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of all prefixes from shortest to longest of the input string\n    >>> all_prefixes('abc')\n    ['a', 'ab', 'abc']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 272,
+                "outputTokens": 17,
+                "totalTokens": 289,
+                "latencyMs": 221
+            },
+            "generated_answer": "return ' '.join(map(str, range(n + 1)))",
+            "expected_answer": "    return ' '.join([str(x) for x in range(n + 1)])\n",
+            "question": "\n\ndef string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 271,
+                "outputTokens": 34,
+                "totalTokens": 305,
+                "latencyMs": 225
+            },
+            "generated_answer": "distinct_chars = set()\n\n    for char in string.lower():\n        distinct_chars.add(char)\n\n    return len(distinct_chars)",
+            "expected_answer": "    return len(set(string.lower()))\n",
+            "question": "\n\ndef count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct characters (regardless of case) does it consist of\n    >>> count_distinct_characters('xyzXYZ')\n    3\n    >>> count_distinct_characters('Jerry')\n    4\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 376,
+                "outputTokens": 58,
+                "totalTokens": 434,
+                "latencyMs": 345
+            },
+            "generated_answer": "beats = []\nfor note in music_string.split():\n    if note == 'o':\n        beats.append(4)\n    elif note == 'o|':\n        beats.append(2)\n    elif note == '.|.':\n        beats.append(1)\nreturn beats",
+            "expected_answer": "    note_map = {'o': 4, 'o|': 2, '.|': 1}\n    return [note_map[x] for x in music_string.split(' ') if x]\n",
+            "question": "from typing import List\n\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 295,
+                "outputTokens": 51,
+                "totalTokens": 346,
+                "latencyMs": 296
+            },
+            "generated_answer": "count = 0\n    start = 0\n    while True:\n        start = string.find(substring, start)\n        if start == -1:\n            break\n        count += 1\n        start += 1\n    return count",
+            "expected_answer": "    times = 0\n\n    for i in range(len(string) - len(substring) + 1):\n        if string[i:i+len(substring)] == substring:\n            times += 1\n\n    return times\n",
+            "question": "\n\ndef how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 314,
+                "outputTokens": 109,
+                "totalTokens": 423,
+                "latencyMs": 444
+            },
+            "generated_answer": "numerals = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9}\n\ninput_list = numbers.split()\nsorted_numbers = sorted(input_list, key=lambda x: numerals[x])\n\nreturn ' '.join(sorted_numbers)",
+            "expected_answer": "    value_map = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    return ' '.join(sorted([x for x in numbers.split(' ') if x], key=lambda x: value_map[x]))\n",
+            "question": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        }
+    ],
+    "us.anthropic.claude-3-5-haiku-20241022-v1:0": [
+        {
+            "metadata": {
+                "inputTokens": 353,
+                "outputTokens": 53,
+                "totalTokens": 406,
+                "latencyMs": 2253
+            },
+            "generated_answer": "for i in range(len(numbers)):\n    for j in range(i + 1, len(numbers)):\n        if abs(numbers[i] - numbers[j]) < threshold:\n            return True\n    return False",
+            "expected_answer": "    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n",
+            "question": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 359,
+                "outputTokens": 107,
+                "totalTokens": 466,
+                "latencyMs": 1795
+            },
+            "generated_answer": "result = []\n    current_group = []\n    depth = 0\n\n    for char in paren_string:\n        if char == '(':\n            depth += 1\n            current_group.append(char)\n        elif char == ')':\n            depth -= 1\n            current_group.append(char)\n\n            if depth == 0:\n                result.append(''.join(current_group))\n                current_group = []\n\n    return result",
+            "expected_answer": "    result = []\n    current_string = []\n    current_depth = 0\n\n    for c in paren_string:\n        if c == '(':\n            current_depth += 1\n            current_string.append(c)\n        elif c == ')':\n            current_depth -= 1\n            current_string.append(c)\n\n            if current_depth == 0:\n                result.append(''.join(current_string))\n                current_string.clear()\n\n    return result\n",
+            "question": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 313,
+                "outputTokens": 10,
+                "totalTokens": 323,
+                "latencyMs": 795
+            },
+            "generated_answer": "return number - int(number)",
+            "expected_answer": "    return number % 1.0\n",
+            "question": "\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 347,
+                "outputTokens": 35,
+                "totalTokens": 382,
+                "latencyMs": 1382
+            },
+            "generated_answer": "balance = 0\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n    return False",
+            "expected_answer": "    balance = 0\n\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n\n    return False\n",
+            "question": "from typing import List\n\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\" You're given a list of deposit and withdrawal operations on a bank account that starts with\n    zero balance. Your task is to detect if at any point the balance of account fallls below zero, and\n    at that point function should return True. Otherwise it should return False.\n    >>> below_zero([1, 2, 3])\n    False\n    >>> below_zero([1, 2, -4, 5])\n    True\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 346,
+                "outputTokens": 46,
+                "totalTokens": 392,
+                "latencyMs": 1341
+            },
+            "generated_answer": "if not numbers:\n    return 0.0\nmean = sum(numbers) / len(numbers)\nreturn sum(abs(x - mean) for x in numbers) / len(numbers)",
+            "expected_answer": "    mean = sum(numbers) / len(numbers)\n    return sum(abs(x - mean) for x in numbers) / len(numbers)\n",
+            "question": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 323,
+                "outputTokens": 46,
+                "totalTokens": 369,
+                "latencyMs": 1329
+            },
+            "generated_answer": "result = []\n    for i, num in enumerate(numbers):\n        if i > 0:\n            result.append(delimeter)\n        result.append(num)\n    return result",
+            "expected_answer": "    if not numbers:\n        return []\n\n    result = []\n\n    for n in numbers[:-1]:\n        result.append(n)\n        result.append(delimeter)\n\n    result.append(numbers[-1])\n\n    return result\n",
+            "question": "from typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 353,
+                "outputTokens": 101,
+                "totalTokens": 454,
+                "latencyMs": 2809
+            },
+            "generated_answer": "result = []\n    for group in paren_string.split():\n        max_depth = 0\n        current_depth = 0\n        for char in group:\n            if char == '(':\n                current_depth += 1\n                max_depth = max(max_depth, current_depth)\n            elif char == ')':\n                current_depth -= 1\n        result.append(max_depth)\n    return result",
+            "expected_answer": "    def parse_paren_group(s):\n        depth = 0\n        max_depth = 0\n        for c in s:\n            if c == '(':\n                depth += 1\n                max_depth = max(depth, max_depth)\n            else:\n                depth -= 1\n\n        return max_depth\n\n    return [parse_paren_group(x) for x in paren_string.split(' ') if x]\n",
+            "question": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 330,
+                "outputTokens": 15,
+                "totalTokens": 345,
+                "latencyMs": 1354
+            },
+            "generated_answer": "return [s for s in strings if substring in s]",
+            "expected_answer": "    return [x for x in strings if substring in x]\n",
+            "question": "from typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 345,
+                "outputTokens": 49,
+                "totalTokens": 394,
+                "latencyMs": 1183
+            },
+            "generated_answer": "total_sum = sum(numbers)\n    total_product = 1\n    \n    for num in numbers:\n        total_product *= num\n    \n    return (total_sum, total_product)",
+            "expected_answer": "    sum_value = 0\n    prod_value = 1\n\n    for n in numbers:\n        sum_value += n\n        prod_value *= n\n    return sum_value, prod_value\n",
+            "question": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 330,
+                "outputTokens": 51,
+                "totalTokens": 381,
+                "latencyMs": 1072
+            },
+            "generated_answer": "result = []\n    current_max = float('-inf')\n    for num in numbers:\n        current_max = max(current_max, num)\n        result.append(current_max)\n    return result",
+            "expected_answer": "    running_max = None\n    result = []\n\n    for n in numbers:\n        if running_max is None:\n            running_max = n\n        else:\n            running_max = max(running_max, n)\n\n        result.append(running_max)\n\n    return result\n",
+            "question": "from typing import List, Tuple\n\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 386,
+                "outputTokens": 62,
+                "totalTokens": 448,
+                "latencyMs": 1611
+            },
+            "generated_answer": "if not string:\n        return string\n\n    for i in range(len(string)):\n        if is_palindrome(string[i:]):\n            return string + string[:i][::-1]\n\n    return string + string[:-1][::-1]",
+            "expected_answer": "    if not string:\n        return ''\n\n    beginning_of_suffix = 0\n\n    while not is_palindrome(string[beginning_of_suffix:]):\n        beginning_of_suffix += 1\n\n    return string + string[:beginning_of_suffix][::-1]\n",
+            "question": "\n\ndef is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 308,
+                "outputTokens": 30,
+                "totalTokens": 338,
+                "latencyMs": 854
+            },
+            "generated_answer": "return ''.join(str(int(x) ^ int(y)) for x, y in zip(a, b))",
+            "expected_answer": "    def xor(i, j):\n        if i == j:\n            return '0'\n        else:\n            return '1'\n\n    return ''.join(xor(x, y) for x, y in zip(a, b))\n",
+            "question": "from typing import List\n\n\ndef string_xor(a: str, b: str) -> str:\n    \"\"\" Input are two strings a and b consisting only of 1s and 0s.\n    Perform binary XOR on these inputs and return result also as a string.\n    >>> string_xor('010', '110')\n    '100'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 336,
+                "outputTokens": 24,
+                "totalTokens": 360,
+                "latencyMs": 1018
+            },
+            "generated_answer": "if not strings:\n        return None\n    \n    return max(strings, key=len)",
+            "expected_answer": "    if not strings:\n        return None\n\n    maxlen = max(len(x) for x in strings)\n    for s in strings:\n        if len(s) == maxlen:\n            return s\n",
+            "question": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 298,
+                "outputTokens": 33,
+                "totalTokens": 331,
+                "latencyMs": 1230
+            },
+            "generated_answer": "a, b = abs(a), abs(b)\nwhile b:\n    a, b = b, a % b\nreturn a",
+            "expected_answer": "    while b:\n        a, b = b, a % b\n    return a\n",
+            "question": "\n\ndef greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two integers a and b\n    >>> greatest_common_divisor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 286,
+                "outputTokens": 40,
+                "totalTokens": 326,
+                "latencyMs": 1980
+            },
+            "generated_answer": "prefixes = []\n    for i in range(1, len(string) + 1):\n        prefixes.append(string[:i])\n    return prefixes",
+            "expected_answer": "    result = []\n\n    for i in range(len(string)):\n        result.append(string[:i+1])\n    return result\n",
+            "question": "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of all prefixes from shortest to longest of the input string\n    >>> all_prefixes('abc')\n    ['a', 'ab', 'abc']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 300,
+                "outputTokens": 22,
+                "totalTokens": 322,
+                "latencyMs": 1124
+            },
+            "generated_answer": "return ' '.join(str(i) for i in range(n + 1))",
+            "expected_answer": "    return ' '.join([str(x) for x in range(n + 1)])\n",
+            "question": "\n\ndef string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 296,
+                "outputTokens": 12,
+                "totalTokens": 308,
+                "latencyMs": 1356
+            },
+            "generated_answer": "return len(set(string.lower()))",
+            "expected_answer": "    return len(set(string.lower()))\n",
+            "question": "\n\ndef count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct characters (regardless of case) does it consist of\n    >>> count_distinct_characters('xyzXYZ')\n    3\n    >>> count_distinct_characters('Jerry')\n    4\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 405,
+                "outputTokens": 72,
+                "totalTokens": 477,
+                "latencyMs": 2150
+            },
+            "generated_answer": "beats = []\n    for note in music_string.split():\n        if note == 'o':\n            beats.append(4)\n        elif note == 'o|':\n            beats.append(2)\n        elif note == '.|':\n            beats.append(1)\n    return beats",
+            "expected_answer": "    note_map = {'o': 4, 'o|': 2, '.|': 1}\n    return [note_map[x] for x in music_string.split(' ') if x]\n",
+            "question": "from typing import List\n\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 328,
+                "outputTokens": 53,
+                "totalTokens": 381,
+                "latencyMs": 1582
+            },
+            "generated_answer": "count = 0\n    for i in range(len(string) - len(substring) + 1):\n        if string[i:i+len(substring)] == substring:\n            count += 1\n    return count",
+            "expected_answer": "    times = 0\n\n    for i in range(len(string) - len(substring) + 1):\n        if string[i:i+len(substring)] == substring:\n            times += 1\n\n    return times\n",
+            "question": "\n\ndef how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 343,
+                "outputTokens": 146,
+                "totalTokens": 489,
+                "latencyMs": 2393
+            },
+            "generated_answer": "word_to_num = {\n    'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,\n    'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9\n}\n\nnum_to_word = {v: k for k, v in word_to_num.items()}\n\nwords = numbers.split()\nsorted_words = sorted(words, key=lambda x: word_to_num[x])\nreturn ' '.join(sorted_words)",
+            "expected_answer": "    value_map = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    return ' '.join(sorted([x for x in numbers.split(' ') if x], key=lambda x: value_map[x]))\n",
+            "question": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        }
+    ],
+    "us.anthropic.claude-3-5-sonnet-20241022-v2:0": [
+        {
+            "metadata": {
+                "inputTokens": 354,
+                "outputTokens": 54,
+                "totalTokens": 408,
+                "latencyMs": 1399
+            },
+            "generated_answer": "   for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if abs(numbers[i] - numbers[j]) < threshold:\n                return True\n    return False",
+            "expected_answer": "    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n",
+            "question": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 359,
+                "outputTokens": 153,
+                "totalTokens": 512,
+                "latencyMs": 3629
+            },
+            "generated_answer": "   # Remove spaces and initialize variables\n    paren_string = paren_string.replace(\" \", \"\")\n    result = []\n    current_group = []\n    depth = 0\n    \n    for char in paren_string:\n        if char == '(':\n            depth += 1\n            current_group.append(char)\n        elif char == ')':\n            depth -= 1\n            current_group.append(char)\n            \n            # If depth is 0, we've completed a group\n            if depth == 0:\n                result.append(''.join(current_group))\n                current_group = []\n                \n    return result",
+            "expected_answer": "    result = []\n    current_string = []\n    current_depth = 0\n\n    for c in paren_string:\n        if c == '(':\n            current_depth += 1\n            current_string.append(c)\n        elif c == ')':\n            current_depth -= 1\n            current_string.append(c)\n\n            if current_depth == 0:\n                result.append(''.join(current_string))\n                current_string.clear()\n\n    return result\n",
+            "question": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 315,
+                "outputTokens": 11,
+                "totalTokens": 326,
+                "latencyMs": 861
+            },
+            "generated_answer": "   return number - int(number)",
+            "expected_answer": "    return number % 1.0\n",
+            "question": "\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 347,
+                "outputTokens": 36,
+                "totalTokens": 383,
+                "latencyMs": 1262
+            },
+            "generated_answer": "   balance = 0\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n    return False",
+            "expected_answer": "    balance = 0\n\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n\n    return False\n",
+            "question": "from typing import List\n\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\" You're given a list of deposit and withdrawal operations on a bank account that starts with\n    zero balance. Your task is to detect if at any point the balance of account fallls below zero, and\n    at that point function should return True. Otherwise it should return False.\n    >>> below_zero([1, 2, 3])\n    False\n    >>> below_zero([1, 2, -4, 5])\n    True\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 346,
+                "outputTokens": 60,
+                "totalTokens": 406,
+                "latencyMs": 1870
+            },
+            "generated_answer": "   if not numbers:\n        return 0.0\n    mean = sum(numbers) / len(numbers)\n    deviations = [abs(x - mean) for x in numbers]\n    return sum(deviations) / len(numbers)",
+            "expected_answer": "    mean = sum(numbers) / len(numbers)\n    return sum(abs(x - mean) for x in numbers) / len(numbers)\n",
+            "question": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 326,
+                "outputTokens": 62,
+                "totalTokens": 388,
+                "latencyMs": 1861
+            },
+            "generated_answer": "   if not numbers:\n        return []\n    result = []\n    for i, num in enumerate(numbers):\n        result.append(num)\n        if i < len(numbers) - 1:\n            result.append(delimeter)\n    return result",
+            "expected_answer": "    if not numbers:\n        return []\n\n    result = []\n\n    for n in numbers[:-1]:\n        result.append(n)\n        result.append(delimeter)\n\n    result.append(numbers[-1])\n\n    return result\n",
+            "question": "from typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 353,
+                "outputTokens": 94,
+                "totalTokens": 447,
+                "latencyMs": 1994
+            },
+            "generated_answer": "   result = []\n    for group in paren_string.split():\n        depth = 0\n        max_depth = 0\n        for char in group:\n            if char == '(':\n                depth += 1\n                max_depth = max(max_depth, depth)\n            elif char == ')':\n                depth -= 1\n        result.append(max_depth)\n    return result",
+            "expected_answer": "    def parse_paren_group(s):\n        depth = 0\n        max_depth = 0\n        for c in s:\n            if c == '(':\n                depth += 1\n                max_depth = max(depth, max_depth)\n            else:\n                depth -= 1\n\n        return max_depth\n\n    return [parse_paren_group(x) for x in paren_string.split(' ') if x]\n",
+            "question": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 329,
+                "outputTokens": 16,
+                "totalTokens": 345,
+                "latencyMs": 988
+            },
+            "generated_answer": "   return [s for s in strings if substring in s]",
+            "expected_answer": "    return [x for x in strings if substring in x]\n",
+            "question": "from typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 345,
+                "outputTokens": 59,
+                "totalTokens": 404,
+                "latencyMs": 1818
+            },
+            "generated_answer": "   if not numbers:\n        return (0, 1)\n        \n    total_sum = sum(numbers)\n    product = 1\n    for num in numbers:\n        product *= num\n        \n    return (total_sum, product)",
+            "expected_answer": "    sum_value = 0\n    prod_value = 1\n\n    for n in numbers:\n        sum_value += n\n        prod_value *= n\n    return sum_value, prod_value\n",
+            "question": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 328,
+                "outputTokens": 68,
+                "totalTokens": 396,
+                "latencyMs": 1493
+            },
+            "generated_answer": "   if not numbers:\n        return []\n        \n    result = []\n    current_max = numbers[0]\n    \n    for num in numbers:\n        current_max = max(current_max, num)\n        result.append(current_max)\n        \n    return result",
+            "expected_answer": "    running_max = None\n    result = []\n\n    for n in numbers:\n        if running_max is None:\n            running_max = n\n        else:\n            running_max = max(running_max, n)\n\n        result.append(running_max)\n\n    return result\n",
+            "question": "from typing import List, Tuple\n\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 386,
+                "outputTokens": 67,
+                "totalTokens": 453,
+                "latencyMs": 1745
+            },
+            "generated_answer": "   if not string:\n        return ''\n        \n    for i in range(len(string)):\n        if is_palindrome(string[i:]):\n            return string + string[:i][::-1]\n            \n    return string + string[:-1][::-1]",
+            "expected_answer": "    if not string:\n        return ''\n\n    beginning_of_suffix = 0\n\n    while not is_palindrome(string[beginning_of_suffix:]):\n        beginning_of_suffix += 1\n\n    return string + string[:beginning_of_suffix][::-1]\n",
+            "question": "\n\ndef is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 305,
+                "outputTokens": 39,
+                "totalTokens": 344,
+                "latencyMs": 1127
+            },
+            "generated_answer": "   result = ''\n    for x, y in zip(a, b):\n        result += '1' if x != y else '0'\n    return result",
+            "expected_answer": "    def xor(i, j):\n        if i == j:\n            return '0'\n        else:\n            return '1'\n\n    return ''.join(xor(x, y) for x, y in zip(a, b))\n",
+            "question": "from typing import List\n\n\ndef string_xor(a: str, b: str) -> str:\n    \"\"\" Input are two strings a and b consisting only of 1s and 0s.\n    Perform binary XOR on these inputs and return result also as a string.\n    >>> string_xor('010', '110')\n    '100'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 338,
+                "outputTokens": 23,
+                "totalTokens": 361,
+                "latencyMs": 1108
+            },
+            "generated_answer": "   if not strings:\n        return None\n    return max(strings, key=len)",
+            "expected_answer": "    if not strings:\n        return None\n\n    maxlen = max(len(x) for x in strings)\n    for s in strings:\n        if len(s) == maxlen:\n            return s\n",
+            "question": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 301,
+                "outputTokens": 25,
+                "totalTokens": 326,
+                "latencyMs": 1170
+            },
+            "generated_answer": "   while b:\n        a, b = b, a % b\n    return abs(a)",
+            "expected_answer": "    while b:\n        a, b = b, a % b\n    return a\n",
+            "question": "\n\ndef greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two integers a and b\n    >>> greatest_common_divisor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 286,
+                "outputTokens": 38,
+                "totalTokens": 324,
+                "latencyMs": 1311
+            },
+            "generated_answer": "   result = []\n    for i in range(1, len(string) + 1):\n        result.append(string[:i])\n    return result",
+            "expected_answer": "    result = []\n\n    for i in range(len(string)):\n        result.append(string[:i+1])\n    return result\n",
+            "question": "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of all prefixes from shortest to longest of the input string\n    >>> all_prefixes('abc')\n    ['a', 'ab', 'abc']\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 301,
+                "outputTokens": 23,
+                "totalTokens": 324,
+                "latencyMs": 928
+            },
+            "generated_answer": "   return ' '.join(str(i) for i in range(n + 1))",
+            "expected_answer": "    return ' '.join([str(x) for x in range(n + 1)])\n",
+            "question": "\n\ndef string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 299,
+                "outputTokens": 13,
+                "totalTokens": 312,
+                "latencyMs": 978
+            },
+            "generated_answer": "   return len(set(string.lower()))",
+            "expected_answer": "    return len(set(string.lower()))\n",
+            "question": "\n\ndef count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct characters (regardless of case) does it consist of\n    >>> count_distinct_characters('xyzXYZ')\n    3\n    >>> count_distinct_characters('Jerry')\n    4\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 405,
+                "outputTokens": 84,
+                "totalTokens": 489,
+                "latencyMs": 1959
+            },
+            "generated_answer": "   notes = music_string.split()\n    durations = []\n    for note in notes:\n        if note == 'o':\n            durations.append(4)\n        elif note == 'o|':\n            durations.append(2)\n        elif note == '.|':\n            durations.append(1)\n    return durations",
+            "expected_answer": "    note_map = {'o': 4, 'o|': 2, '.|': 1}\n    return [note_map[x] for x in music_string.split(' ') if x]\n",
+            "question": "from typing import List\n\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 326,
+                "outputTokens": 76,
+                "totalTokens": 402,
+                "latencyMs": 2021
+            },
+            "generated_answer": "   if not substring or len(substring) > len(string):\n        return 0\n        \n    count = 0\n    for i in range(len(string) - len(substring) + 1):\n        if string[i:i + len(substring)] == substring:\n            count += 1\n    return count",
+            "expected_answer": "    times = 0\n\n    for i in range(len(string) - len(substring) + 1):\n        if string[i:i+len(substring)] == substring:\n            times += 1\n\n    return times\n",
+            "question": "\n\ndef how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n",
+            "retrieved_contexts": null
+        },
+        {
+            "metadata": {
+                "inputTokens": 343,
+                "outputTokens": 123,
+                "totalTokens": 466,
+                "latencyMs": 2393
+            },
+            "generated_answer": "   num_dict = {\n        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,\n        'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9\n    }\n    words = numbers.split()\n    sorted_words = sorted(words, key=lambda x: num_dict[x])\n    return ' '.join(sorted_words)",
+            "expected_answer": "    value_map = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    return ' '.join(sorted([x for x in numbers.split(' ') if x], key=lambda x: value_map[x]))\n",
+            "question": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n",
+            "retrieved_contexts": null
+        }
+    ]
+}
